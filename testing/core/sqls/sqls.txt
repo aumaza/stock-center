@@ -1,0 +1,19 @@
+#tabla usuarios
+create table sct_usuarios(
+id int(11) auto_increment primary key not null,
+nombre varchar(60) binary not null,
+user varchar(90) binary not null,
+password varchar(15) binary not null,
+role int(11) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla productos
+create table sct_productos(
+id int(11) auto_increment primary key not null,
+cod_producto varchar(6) not null,
+descripcion varchar(60) not null,
+marca varchar(60) not null,
+cantidad int(11) not null,
+fabricante varchar(60) not null,
+nro_lote varchar(30) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
