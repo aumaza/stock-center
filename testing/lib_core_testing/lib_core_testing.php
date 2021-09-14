@@ -36,6 +36,13 @@ function buttonGroup($nombre){
     echo '<nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                 <div class="btn-group">
                     <button type="button" class="btn btn-success navbar-btn dropdown-toggle" data-toggle="dropdown">
@@ -54,7 +61,7 @@ function buttonGroup($nombre){
                     </ul>
                 </div>
                 </ul>
-                </div>
+                
                 
                 <ul class="nav navbar-nav">
                 
@@ -96,6 +103,7 @@ function buttonGroup($nombre){
                 </div>
                     
                 </ul>
+            </div>
             </div>
             </nav>';
 
@@ -210,7 +218,7 @@ function modalLoginTesting(){
 */
 function charValidator($var){
 
-$pattern_string = '/^[a-z0-9 ]+$/i';
+$pattern_string = '/^[a-z0-9áéíóú ]+$/i';
 $validate = -1;
 
 if(preg_match($pattern_string,$var)){
@@ -243,5 +251,27 @@ if(preg_match($pattern_string,$var)){
 }
 
 }
+
+
+/*
+** validacion de email
+*/
+function emailValidator($var){
+
+$pattern_string = '/^[a-z0-9*._@#]+$/i';
+
+$validate = -1;
+
+if(preg_match($pattern_string,$var)){
+
+    return $validate = 1;
+
+}else{
+
+    return $validate = 0;
+}
+
+}
+
 
 ?>

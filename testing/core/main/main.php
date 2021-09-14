@@ -3,6 +3,7 @@
       include "../../../core/lib_core/lib_core.php";
       include "../../lib_core_testing/lib_core_testing.php";
       include "../lib_productos/lib_productos.php";
+      include "../lib_proveedores/lib_proveedores.php";
       
       $usuario = $_SESSION['user'];
       $password = $_SESSION['pass'];
@@ -47,6 +48,7 @@ while($row = mysqli_fetch_array($query)){
   <link rel="icon" type="image/png" href="../../../img/img-favicon32x32.png" />
    
   <?php skeleton(); ?>
+  
   
   <!-- Data Table Script -->
 <script>
@@ -173,7 +175,38 @@ if(isset($_POST['delete_producto'])){
     deleteProduct($id,$conn);
 }
 
-
+// ESPACIO DE PROVEEDORES //
+// LISTADO
+if(isset($_POST['listar_proveedores'])){
+    listarProveedores($conn);
+}
+// FORMULARIOS
+if(isset($_POST['proveedores'])){
+    formAltaProveedor();
+}
+if(isset($_POST['guardar_proveedor'])){
+    $nombre_proveedor = mysqli_real_escape_string($conn,$_POST['nombre_proveedor']);
+    $empresa = mysqli_real_escape_string($conn,$_POST['empresa']);
+    $tipo_producto = mysqli_real_escape_string($conn,$_POST['tipo_producto']);
+    $email = mysqli_real_escape_string($conn,$_POST['email']);
+    $movil = mysqli_real_escape_string($conn,$_POST['movil']);
+    $telefono = mysqli_real_escape_string($conn,$_POST['telefono']);
+    addProveedor($nombre_proveedor,$empresa,$tipo_producto,$email,$movil,$telefono,$conn);
+}
+if(isset($_POST['edit_proveedor'])){
+    $id = mysqli_real_escape_string($conn,$_POST['id']);
+    formEditProveedor($id,$conn);
+}
+if(isset($_POST['update_proveedor'])){
+    $id = mysqli_real_escape_string($conn,$_POST['id']);
+    $nombre_proveedor = mysqli_real_escape_string($conn,$_POST['nombre_proveedor']);
+    $empresa = mysqli_real_escape_string($conn,$_POST['empresa']);
+    $tipo_producto = mysqli_real_escape_string($conn,$_POST['tipo_producto']);
+    $email = mysqli_real_escape_string($conn,$_POST['email']);
+    $movil = mysqli_real_escape_string($conn,$_POST['movil']);
+    $telefono = mysqli_real_escape_string($conn,$_POST['telefono']);
+    updateProveedor($id,$nombre_proveedor,$empresa,$tipo_producto,$email,$movil,$telefono,$conn);
+}
 
 }else{
 
@@ -191,6 +224,9 @@ if(isset($_POST['delete_producto'])){
 <footer class="container-fluid text-center">
   <p>Powered By <img class="img-reponsive img-rounded" src="../../../img/devel-slack-logo2-32x32.png" /><a href="https://deps.slackzone.com.ar/slackzone-devel" target="_blank"> Slackzone Development</a></p>
 </footer>
+
+<script src="../lib_proveedores/lib_proveedores.js"></script>
+<script src="../lib_productos/lib_productos.js"></script>
 
 </body>
 </html>

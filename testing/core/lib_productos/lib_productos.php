@@ -3,7 +3,7 @@
 // ========================================================================================= //
 // LISTADOS //
 /*
-** funcion que carga la tabla de todas las ventas de heladeria
+** funcion que carga la tabla de todos los productos
 */
 
 
@@ -164,7 +164,7 @@ function formEditProductos($id,$conn){
     echo '<div class="container" style="margin-top:70px">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <img class="img-reponsive img-rounded" src="../icons/actions/list-add.png" /> Carga de Productos</div>
+                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar Producto</div>
                 <div class="panel-body">
                      <form action="#" method="POST">
                      <input type="hidden" name="id" value="'.$id.'">
@@ -173,45 +173,59 @@ function formEditProductos($id,$conn){
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="cod_prod">Código Producto:</label>
-                                    <input type="text" class="form-control" id="cod_prod" name="cod_producto" value="'.$cod_producto.'" required>
-                                </div>
+                                    <input type="text" class="form-control" id="edit_cod_prod" name="cod_producto" value="'.$cod_producto.'" required readonly><br>
+                                    <button type="button" class="btn btn-warning" onclick=callEditProd("edit_cod_prod")>
+                                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar</button>
+                                </div><hr>
                                 <div class="form-group">
                                     <label for="descripcion">Descripción:</label>
-                                    <input type="text" class="form-control" id="descripcion" name="descripcion" value="'.$descripcion.'" required>
+                                    <input type="text" class="form-control" id="edit_descripcion" name="descripcion" value="'.$descripcion.'" required readonly><br>
+                                    <button type="button" class="btn btn-warning" onclick=callEditProd("edit_descripcion")>
+                                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar</button>
                                 </div>
                             </div>
                             
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="marca">Marca:</label>
-                                    <input type="text" class="form-control" id="marca" name="marca" value="'.$marca.'" required>
-                                </div>
+                                    <input type="text" class="form-control" id="edit_marca" name="marca" value="'.$marca.'" required readonly><br>
+                                    <button type="button" class="btn btn-warning" onclick=callEditProd("edit_marca")>
+                                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar</button>
+                                </div><hr>
                                 <div class="form-group">
                                     <label for="cantidad">Cantidad:</label>
-                                    <input type="number" class="form-control" id="cantidad" min="1" name="cantidad" value="'.$cantidad.'" required>
+                                    <input type="number" class="form-control" id="edit_cantidad" min="1" name="cantidad" value="'.$cantidad.'" required readonly><br>
+                                    <button type="button" class="btn btn-warning" onclick=callEditProd("edit_cantidad")>
+                                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar</button>
                                 </div>
                             </div>
                             
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label for="fabricante">Fabricante / Productor:</label>
-                                    <input type="text" class="form-control" id="fabricante" name="fabricante" value="'.$fabricante.'" required>
-                                </div>
+                                    <input type="text" class="form-control" id="edit_fabricante" name="fabricante" value="'.$fabricante.'" required readonly><br>
+                                    <button type="button" class="btn btn-warning" onclick=callEditProd("edit_fabricante")>
+                                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar</button>
+                                </div><hr>
                                 <div class="form-group">
                                     <label for="lote_nro">Lote Nro.:</label>
-                                    <input type="text" class="form-control" id="lote_nro" name="lote_nro" value="'.$nro_lote.'" required>
-                                </div>
+                                    <input type="text" class="form-control" id="edit_lote_nro" name="lote_nro" value="'.$nro_lote.'" required readonly><br>
+                                    <button type="button" class="btn btn-warning" onclick=callEditProd("edit_lote_nro")>
+                                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar</button>
+                                </div><hr>
                                 
                                 <div class="form-group">
                                     <label for="precio">Valor:</label>
-                                    <input type="text" class="form-control" id="precio" name="precio" value="'.$precio.'" required>
+                                    <input type="text" class="form-control" id="edit_precio" name="precio" value="'.$precio.'" required readonly><br>
+                                    <button type="button" class="btn btn-warning" onclick=callEditProd("edit_precio")>
+                                    <img class="img-reponsive img-rounded" src="../icons/actions/document-edit.png" /> Editar</button>
                                 </div>
                             </div>                                 
                         </div>
                         
                         <div class="row">
-                        <div class="col-sm-3">
-                        <button type="submit" class="btn btn-success" name="update_producto">
+                        <div class="col-sm-9"><hr>
+                        <button type="submit" class="btn btn-success btn-block" name="update_producto">
                             <img class="img-reponsive img-rounded" src="../icons/devices/media-floppy.png" /> Guardar</button>
                         </div>
                         </div>
