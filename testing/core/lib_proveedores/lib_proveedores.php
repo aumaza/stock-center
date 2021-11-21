@@ -229,6 +229,47 @@ function formEditProveedor($id,$conn){
 }
 
 
+/*
+** funcion para eliminar un registro de equipo
+*/
+function formEliminarProovedor($id,$conn){
+
+        $sql = "select * from sct_proveedores where id = '$id'";
+        mysqli_select_db($conn,'stock_center_testing');
+        $query = mysqli_query($conn,$sql);
+        while($fila = mysqli_fetch_array($query)){
+                $proveedor = $fila['nombre_proveedor'];
+            }
+            
+            echo '<div class="container" style="margin-top:70px">
+            <div class="row">
+            <div class="col-sm-8">
+            
+            <div class="panel panel-danger">
+            <div class="panel-heading"><img class="img-reponsive img-rounded" src="../icons/status/security-low.png" /> Proveedor - Eliminar Registro</div>
+            <div class="panel-body">
+            <form action="main.php" method="POST">
+            <input type="hidden" class="form-control" name="id" value="'.$id.'">
+            
+                <div class="alert alert-danger">
+                <img class="img-reponsive img-rounded" src="../icons/status/task-attempt.png" /> <strong>Atención!</strong><hr>
+                <p>Está por eliminar al Proveedor: <strong>'.$proveedor.'</strong></p>
+                <p>Si está seguro, presione Aceptar, de lo contrario presione Cancelar.</p>
+                </div><hr>
+            
+            <button type="submit" class="btn btn-success btn-block" name="delete_proveedor">Aceptar</button><br>
+            </form>
+            <a href="main.php"><button type="button" class="btn btn-danger btn-block">Cancelar</button></a>
+            </div>
+            </div>
+            
+            </div>
+            </div>
+            </div>';
+}
+
+
+
 // ========================================================================================= //
 // PERSISTENCIA //
 /*
@@ -329,6 +370,33 @@ function updateProveedor($id,$nombre_proveedor,$empresa,$tipo_producto,$email,$m
 
 }
 
+/*
+** actualizar producto en la base de datos
+*/
+function deleteProveedor($id,$conn){
+   
+         
+   mysqli_select_db($conn,'stock_center_testing'); 
+   $sql = "delete from sct_proveedores where id = '$id'";
+   $query = mysqli_query($conn,$sql);
+           
+           if($query){
+           
+              echo  '<div class="alert alert-success alert-dismissible" style="margin-top:70px">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <img class="img-reponsive img-rounded" src="../icons/actions/mail-mark-notjunk.png" /> Registro Eliminado Exitosamente!!.
+                    </div>';
+           
+           }else{
+           
+              echo  '<div class="alert alert-danger alert-dismissible" style="margin-top:70px">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <img class="img-reponsive img-rounded" src="../icons/status/task-attempt.png" /> Hubo un problema al intentar eliminar el Registro!!' . mysqli_error($conn);
+                    echo '</div>';
+                    exit;
+           }
+     
+}
 
 
 ?>

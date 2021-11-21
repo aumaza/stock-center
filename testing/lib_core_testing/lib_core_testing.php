@@ -45,38 +45,57 @@ function buttonGroup($nombre){
                 <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success navbar-btn dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class="btn btn-primary navbar-btn dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" title="Menú de Usuario">
                     <img class="img-reponsive img-rounded" src="../icons/actions/view-media-artist.png" />'. $nombre.' <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu">
                     <form action="#" method="POST">
-                        <li><button type="submit" class="btn btn-default btn-xs btn-block">
+                                          
+                        <li><button type="submit" class="btn btn-default btn-xs btn-block" data-toggle="tooltip" title="Actualizar Password de Usuario">
                             <img class="img-reponsive img-rounded" src="../icons/actions/view-refresh.png" /> Cambiar Password</button></li>
                         
-                        <li><button type="submit" class="btn btn-default btn-xs btn-block">
+                        <li><button type="submit" class="btn btn-default btn-xs btn-block" data-toggle="tooltip" title="Editar Datos Personales">
                             <img class="img-reponsive img-rounded" src="../icons/actions/view-ldap-resource.png" /> Datos Personales</button></li>
                         
-                        <li><button type="submit" class="btn btn-default btn-xs btn-block" name="logout">
+                        <li><button type="submit" class="btn btn-default btn-xs btn-block" name="logout" data-toggle="tooltip" title="Salir del Sistema">
                             <img class="img-reponsive img-rounded" src="../icons/actions/system-shutdown.png" /> Salir</button></li>
                     </form>
                     </ul>
                 </div>
-                </ul>
-                
-                
-                <ul class="nav navbar-nav">
                 
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
+                <form action="#" method="POST">
+                <button type="submit" class="btn btn-success navbar-btn" name="nueva_venta" data-toggle="tooltip" title="Iniciar Nueva Venta">
+                    <img class="img-reponsive img-rounded" src="../icons/actions/dialog-ok.png" /> Nueva Venta</button>
+                </form>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" title="Administración de Caja">
+                        <img class="img-reponsive img-rounded" src="../icons/actions/view-income-categories.png" /> Caja <span class="caret"></span></button>
+                    <ul class="dropdown-menu" role="menu">
+                    <form action="#" method="POST">
+                        <li><button type="submit" class="btn btn-default btn-xs btn-block" name="apertura_caja" data-toggle="tooltip" title="Apertura de Caja">
+                            <img class="img-reponsive img-rounded" src="../icons/actions/cash-register-on.png" /> Apertura</button></li>
+                            
+                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="cierre_caja" data-toggle="tooltip" title="Cierre de Caja">
+                            <img class="img-reponsive img-rounded" src="../icons/actions/cash-register-off.png" /> Cierre</button></li>
+                    
+                     </form>
+                    </ul>
+                </div>
+                             
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" title="Carga de Datos">
                         <img class="img-reponsive img-rounded" src="../icons/actions/list-add.png" /> Altas <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu">
                     <form action="#" method="POST">
-                        <li><button type="submit" class="btn btn-default btn-xs btn-block" name="productos">
+                        <li><button type="submit" class="btn btn-default btn-xs btn-block" name="productos" data-toggle="tooltip" title="Carga de Productos">
                             <img class="img-reponsive img-rounded" src="../icons/actions/feed-subscribe.png" /> Productos</button></li>
                             
-                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="usuarios">
+                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="usuarios" data-toggle="tooltip" title="Carga de Usuarios">
                             <img class="img-reponsive img-rounded" src="../icons/actions/user-group-new.png" /> Usuarios</button></li>
                     
-                     <li><button type="submit" class="btn btn-default btn-xs btn-block" name="proveedores">
+                     <li><button type="submit" class="btn btn-default btn-xs btn-block" name="proveedores" data-toggle="tooltip" title="Carga de Proveedores">
                             <img class="img-reponsive img-rounded" src="../icons/actions/list-resource-add.png" /> Proveedores</button></li>
                     
                     </form>
@@ -85,17 +104,17 @@ function buttonGroup($nombre){
                 
                 
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown">
+                    <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" title="Listar Datos">
                         <img class="img-reponsive img-rounded" src="../icons/actions/view-list-text.png" /> Listados <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu">
                     <form action="#" method="POST">
-                        <li><button type="submit" class="btn btn-default btn-xs btn-block" name="listar_productos">
+                        <li><button type="submit" class="btn btn-default btn-xs btn-block" name="listar_productos" data-toggle="tooltip" title="Listar todos los Productos">
                             <img class="img-reponsive img-rounded" src="../icons/actions/documentation.png" /> Productos</button></li>
                             
-                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="listar_usuarios">
+                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="listar_usuarios" data-toggle="tooltip" title="Listar todos los Usuarios">
                             <img class="img-reponsive img-rounded" src="../icons/actions/meeting-attending.png" /> Usuarios</button></li>
                     
-                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="listar_proveedores">
+                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="listar_proveedores" data-toggle="tooltip" title="Listar todos los Proveedores">
                             <img class="img-reponsive img-rounded" src="../icons/actions/view-choose.png" /> Proveedores</button></li>
                     
                     </form>
@@ -103,6 +122,17 @@ function buttonGroup($nombre){
                 </div>
                     
                 </ul>
+                
+                
+                <ul class="nav navbar-nav navbar-right">
+                <form action="#" method="POST">
+                    <li><button type="submit" class="btn btn-warning navbar-btn" name="home" data-toggle="tooltip" title="Limpiar espacio de Trabajo">
+                        <img class="img-reponsive img-rounded" src="../icons/actions/go-home.png" /> Home</button></li>
+                </form>
+                </ul>
+                
+                
+                
             </div>
             </div>
             </nav>';

@@ -246,7 +246,7 @@ function formEditProductos($id,$conn){
 function formEliminarProducto($id,$conn){
 
         $sql = "select * from sct_productos where id = '$id'";
-        mysqli_select_db($conn,'smb_bienestar');
+        mysqli_select_db($conn,'stock_center_testing');
         $query = mysqli_query($conn,$sql);
         while($fila = mysqli_fetch_array($query)){
                 $descripcion = $fila['descripcion'];

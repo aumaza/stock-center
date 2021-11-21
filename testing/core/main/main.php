@@ -4,6 +4,8 @@
       include "../../lib_core_testing/lib_core_testing.php";
       include "../lib_productos/lib_productos.php";
       include "../lib_proveedores/lib_proveedores.php";
+      include "../lib_caja/lib_caja.php";
+      include "../lib_ventas/lib_ventas.php";
       
       $usuario = $_SESSION['user'];
       $password = $_SESSION['pass'];
@@ -35,7 +37,7 @@ while($row = mysqli_fetch_array($query)){
             die();
             echo '</body></html>';
 }
-      
+      $estado_caja = queryEstadoCaja($conn);
 ?>
 
 
@@ -49,6 +51,62 @@ while($row = mysqli_fetch_array($query)){
    
   <?php skeleton(); ?>
   
+  <!-- Consultar el importe parcial -->
+<script>
+      $(document).ready(function(){   
+         $(document).on('submit', '#consultar_importe_parcial_ajax', function() { 
+
+              //Obtenemos datos formulario.
+              var data = $('#consultar_importe_parcial_ajax').serialize(); 
+              console.log(data);
+
+              //AJAX.
+              $.ajax({  
+                 type:"POST",
+                 url:"../lib_ventas/consultar_importe_parcial.php",
+                 data:data, 
+                 success:function(r){  
+                     if(r){
+                     $('#importe_parcial').val(r);
+                 }else{
+                    alert("No se pudo realizar la consulta");
+                 }
+                 }
+              
+            });
+        return false;
+        });
+      });//Fin document.
+</script>
+
+<!-- Insertar ventas -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#add_producto').click(function(){
+        var datos=$('#fr_venta_ajax').serialize();
+        $.ajax({
+            type:"POST",
+            url:"../lib_ventas/insert_venta.php",
+            data:datos,
+            success:function(r){
+                if(r==1){
+                    
+                    if(confirm("Producto Agregado Exitosamente al Carrito!!")){
+                    
+                    window.setTimeout(function(){window.location.reload(true)},1500)
+                
+                }    
+                }else{
+                    alert("Hubo un problema al intentar Guardar el Producto");
+                    console.log("Datos: " + datos);
+                }
+            }
+        });
+
+        return false;
+    });
+});
+</script>
   
   <!-- Data Table Script -->
 <script>
@@ -81,6 +139,8 @@ while($row = mysqli_fetch_array($query)){
   </script>
   <!-- END Data Table Script -->
   
+  
+  
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -110,7 +170,7 @@ while($row = mysqli_fetch_array($query)){
     
   </style>
 </head>
-<body>
+<body onload="nobackbutton();">
 
 <?php buttonGroup($nombre); ?>
   
@@ -131,6 +191,20 @@ echo '<div class="alert alert-success animate__animated animate__wobble">
         </div>';
 echo '<meta http-equiv="refresh" content="4;URL=../logout.php"/>';
 }
+if(isset($_POST['home'])){
+    echo '<meta http-equiv="refresh" content="URL=main.php"/>';
+}
+
+// ======================================================= //
+// ESPACIO DE VENTAS //
+if(isset($_POST['nueva_venta'])){
+    formNuevaVenta($conn,$nombre);
+}
+if(isset($_POST['cerrar_ticket'])){
+    $nro_ticket = mysqli_real_escape_string($conn,$_POST['nro_ticket']);
+    closeTicket($nro_ticket,$conn);
+}
+
 
 // ======================================================= //
 // ESPACIO DE PRODUCTOS //
@@ -175,6 +249,7 @@ if(isset($_POST['delete_producto'])){
     deleteProduct($id,$conn);
 }
 
+// ======================================================= //
 // ESPACIO DE PROVEEDORES //
 // LISTADO
 if(isset($_POST['listar_proveedores'])){
@@ -207,6 +282,14 @@ if(isset($_POST['update_proveedor'])){
     $telefono = mysqli_real_escape_string($conn,$_POST['telefono']);
     updateProveedor($id,$nombre_proveedor,$empresa,$tipo_producto,$email,$movil,$telefono,$conn);
 }
+if(isset($_POST['del_proveedor'])){
+    $id = mysqli_real_escape_string($conn,$_POST['id']);
+    formEliminarProovedor($id,$conn);
+}
+if(isset($_POST['delete_proveedor'])){
+    $id = mysqli_real_escape_string($conn,$_POST['id']);
+    deleteProveedor($id,$conn);
+}
 
 }else{
 
@@ -222,11 +305,28 @@ if(isset($_POST['update_proveedor'])){
 </div>
 
 <footer class="container-fluid text-center">
-  <p>Powered By <img class="img-reponsive img-rounded" src="../../../img/devel-slack-logo2-32x32.png" /><a href="https://deps.slackzone.com.ar/slackzone-devel" target="_blank"> Slackzone Development</a></p>
+  <p>Powered By <img class="img-reponsive img-rounded" src="../../../img/devel-slack-logo2-32x32.png" />
+    <a href="https://deps.slackzone.com.ar/slackzone-devel" target="_blank"> Slackzone Development</a></p>
 </footer>
 
 <script src="../lib_proveedores/lib_proveedores.js"></script>
 <script src="../lib_productos/lib_productos.js"></script>
+<script src="main.js"></script>
+
+
+<?php
+if($estado_caja == 0){
+    
+    echo "<script>
+            $( document ).ready(function() {
+                $('#modalCaja').modal('toggle')
+            });
+          </script>";
+  
+    modalEstadoCaja();
+}
+
+?>
 
 </body>
 </html>
