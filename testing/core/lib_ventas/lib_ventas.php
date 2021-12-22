@@ -26,6 +26,72 @@ function searchTicket($conn){
 
 
 // ========================================================================================= //
+// LISTADOS //
+/*
+** funcion que carga la tabla de todas las ventas
+*/
+
+
+function listarVentas($conn){
+
+if($conn)
+{
+	$sql = "select empleado, tipo_pago, fecha_venta, hora_venta, nro_ticket, sum(importe) as total from sct_ventas where estado_ticket = 'Cerrado' group by nro_ticket;";
+    	mysqli_select_db($conn,'stock_center_testing');
+    	$resultado = mysqli_query($conn,$sql);
+	//mostramos fila x fila
+	$count = 0;
+	echo '<div class="container" style="margin-top:70px">
+            <div class="panel panel-default" >
+	      <div class="panel-heading"><span class="pull-center "><img src="../icons/actions/view-task.png"  class="img-reponsive img-rounded"> Listado de Ventas';
+	echo '</div><br>';
+
+            echo "<table class='table table-condensed table-hover' style='width:100%' id='myTable'>";
+              echo "<thead>
+		    <th class='text-nowrap text-center'>Usuario</th>
+            <th class='text-nowrap text-center'>Modo de Pago</th>
+            <th class='text-nowrap text-center'>Fecha Venta</th>
+            <th class='text-nowrap text-center'>Hora Venta</th>
+            <th class='text-nowrap text-center'>Nro. Ticket</th>
+            <th class='text-nowrap text-center'>Importe Total</th>
+            <th>&nbsp;</th>
+            </thead>";
+
+
+	while($fila = mysqli_fetch_array($resultado)){
+			  // Listado normal
+			 echo "<tr>";
+			 echo "<td align=center>".$fila['empleado']."</td>";
+			 echo "<td align=center>".$fila['tipo_pago']."</td>";
+			 echo "<td align=center>".$fila['fecha_venta']."</td>";
+			 echo "<td align=center>".$fila['hora_venta']."</td>";
+			 echo "<td align=center>".$fila['nro_ticket']."</td>";
+			 echo "<td align=center>$".$fila['total']."</td>";
+			 echo "<td class='text-nowrap'>";
+             echo '<form <action="#" method="POST">
+                    <input type="hidden" name="id" value="'.$fila['id'].'">';
+                   echo '<button type="submit" class="btn btn-primary btn-sm" name="edit_producto"><img src="../icons/actions/document-edit.png"  class="img-reponsive img-rounded"> Editar</button>';
+                   echo '<button type="submit" class="btn btn-danger btn-sm" name="del_producto"><img src="../icons/actions/trash-empty.png"  class="img-reponsive img-rounded"> Eliminar</button>';
+                   echo '</form>';
+             echo "</td>";
+			 $count++;
+		}
+
+		echo "</table>";
+		echo "<br>";
+		echo '<button type="button" class="btn btn-primary">Cantidad de Productos:  '.$count.' </button>';
+		echo '</div></div>';
+		}else{
+		  echo 'Connection Failure...' .mysqli_error($conn);
+		}
+
+    mysqli_close($conn);
+
+}
+
+
+
+// ========================================================================================= //
 // FORMULARIOS //
 
 

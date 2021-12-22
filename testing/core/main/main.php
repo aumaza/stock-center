@@ -6,6 +6,7 @@
       include "../lib_proveedores/lib_proveedores.php";
       include "../lib_caja/lib_caja.php";
       include "../lib_ventas/lib_ventas.php";
+      include "../lib_pagos/lib_pagos.php";
       
       $usuario = $_SESSION['user'];
       $password = $_SESSION['pass'];
@@ -107,6 +108,38 @@ $(document).ready(function(){
     });
 });
 </script>
+
+
+<!-- Apertura de caja -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#apertura_caja').click(function(){
+        var datos=$('#fr_caja_ajax').serialize();
+        $.ajax({
+            type:"POST",
+            url:"../lib_caja/apertura_caja.php",
+            data:datos,
+            success:function(r){
+                if(r==1){
+                    
+                    if(confirm("Apertura de Caja Exitoza!!")){
+                    
+                    window.setTimeout(function(){window.location.reload(true)},1500)
+                
+                }    
+                }else{
+                    alert('El Campo Importe Apertura debe contener valores numéricos. Si desea expresar decimales utilice un punto en lugar de coma');
+                    console.log("Datos: " + datos);
+                }
+            }
+        });
+
+        return false;
+    });
+});
+</script>
+
+
   
   <!-- Data Table Script -->
 <script>
@@ -184,16 +217,45 @@ $(document).ready(function(){
 
 if($conn){
 
+// ======================================================= //
+// VALIDAD SALIDA DEL SISTEMA SI LA CAJA ESTA ABIERTA O CERRADA //
 if(isset($_POST['logout'])){
-echo '<div class="alert alert-success animate__animated animate__wobble">
-        <strong>Hasta Luego!</strong> Vuelva cuando guste!!
-        <audio autoplay><source src="../../sounds/logout.wav" type="audio/mpeg"></audio>
-        </div>';
-echo '<meta http-equiv="refresh" content="4;URL=../logout.php"/>';
+
+    if($estado_caja == 1){
+    
+        warningClose();
+    
+    }else if($estado_caja == 0){
+    
+        outMessage();
+    
+    }
+
 }
 if(isset($_POST['home'])){
     echo '<meta http-equiv="refresh" content="URL=main.php"/>';
 }
+
+// ======================================================= //
+// APERTURA DE CAJA //
+if(isset($_POST['abrir_caja']) || isset($_POST['apertura_caja'])){
+    
+    if($estado_caja == 1){
+    
+        messageOpenCaje();
+    
+    }elseif(($estado_caja == 0) || ($estado_caja == '')) {
+    
+        formAperturaCaja($nombre);
+    
+    }
+}
+
+// ESTADO DE CAJA
+if(isset($_POST['box_status'])){
+    cajaEstado($conn);
+}
+
 
 // ======================================================= //
 // ESPACIO DE VENTAS //
@@ -203,6 +265,9 @@ if(isset($_POST['nueva_venta'])){
 if(isset($_POST['cerrar_ticket'])){
     $nro_ticket = mysqli_real_escape_string($conn,$_POST['nro_ticket']);
     closeTicket($nro_ticket,$conn);
+}
+if(isset($_POST['ventas'])){
+    listarVentas($conn);
 }
 
 
@@ -289,6 +354,13 @@ if(isset($_POST['del_proveedor'])){
 if(isset($_POST['delete_proveedor'])){
     $id = mysqli_real_escape_string($conn,$_POST['id']);
     deleteProveedor($id,$conn);
+}
+
+// ====================================================================== //
+// SECCION PAGOS //
+// ====================================================================== //
+if(isset($_POST['pagos'])){
+    listarPagos($conn);
 }
 
 }else{

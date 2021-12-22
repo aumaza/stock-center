@@ -80,13 +80,18 @@ function buttonGroup($nombre){
                     <li><button type="submit" class="btn btn-default btn-xs btn-block" name="cierre_caja" data-toggle="tooltip" title="Cierre de Caja">
                             <img class="img-reponsive img-rounded" src="../icons/actions/cash-register-off.png" /> Cierre</button></li>
                     
+                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="box_status" data-toggle="tooltip" title="Lista el Estado de Caja Completo">
+                            <img class="img-reponsive img-rounded" src="../icons/actions/view-financial-transfer.png" /> Estado de Caja</button></li>
+                    
+                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="pagos" data-toggle="tooltip" title="Carga Pago a Proveedores y/o Servicios">
+                            <img class="img-reponsive img-rounded" src="../icons/actions/view-loan-asset.png" /> Pagos</button></li>
                      </form>
                     </ul>
                 </div>
                              
                 <div class="btn-group">
                     <button type="button" class="btn btn-default navbar-btn dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" title="Carga de Datos">
-                        <img class="img-reponsive img-rounded" src="../icons/actions/list-add.png" /> Altas <span class="caret"></span></button>
+                        <img class="img-reponsive img-rounded" src="../icons/actions/go-down.png" /> Ingreso Datos <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu">
                     <form action="#" method="POST">
                         <li><button type="submit" class="btn btn-default btn-xs btn-block" name="productos" data-toggle="tooltip" title="Carga de Productos">
@@ -97,7 +102,7 @@ function buttonGroup($nombre){
                     
                      <li><button type="submit" class="btn btn-default btn-xs btn-block" name="proveedores" data-toggle="tooltip" title="Carga de Proveedores">
                             <img class="img-reponsive img-rounded" src="../icons/actions/list-resource-add.png" /> Proveedores</button></li>
-                    
+                                       
                     </form>
                     </ul>
                 </div>
@@ -116,6 +121,9 @@ function buttonGroup($nombre){
                     
                     <li><button type="submit" class="btn btn-default btn-xs btn-block" name="listar_proveedores" data-toggle="tooltip" title="Listar todos los Proveedores">
                             <img class="img-reponsive img-rounded" src="../icons/actions/view-choose.png" /> Proveedores</button></li>
+                            
+                    <li><button type="submit" class="btn btn-default btn-xs btn-block" name="ventas" data-toggle="tooltip" title="Listar Ventas Realizadas">
+                            <img class="img-reponsive img-rounded" src="../icons/actions/view-financial-payment-mode.png" /> Ventas</button></li>
                     
                     </form>
                     </ul>
@@ -242,6 +250,20 @@ function modalLoginTesting(){
             
 
 }
+
+/*
+** funcion que muestra mensaje al salir del sistema
+*/
+function outMessage(){
+
+echo '<div class="alert alert-success animate__animated animate__wobble">
+        <strong>Hasta Luego!</strong> Vuelva cuando guste!!
+        <audio autoplay><source src="../../sounds/logout.wav" type="audio/mpeg"></audio>
+        </div>';
+echo '<meta http-equiv="refresh" content="4;URL=../logout.php"/>';
+
+}
+
 
 /*
 ** validacion de caracteres

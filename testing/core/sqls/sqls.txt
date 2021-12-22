@@ -56,3 +56,13 @@ importe float(8,2) not null,
 nro_ticket int(11) not null,
 estado_ticket enum('Abierto','Cerrado') not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#tabla pagos
+create table sct_pagos(
+id int(11) auto_increment primary key,
+tipo_pago enum('Proveedores','Servicios') not null,
+proveedor varchar(100),
+servicio varchar(100),
+fecha date not null,
+importe float(8,2) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
